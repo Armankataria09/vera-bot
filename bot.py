@@ -169,7 +169,7 @@ async def tick(body: TickBody) -> dict[str, Any]:
                 # If malformed, do not make a time-based assumption.
                 continue
 
-        suppression_key = trigger.get("suppression_key", "")
+        suppression_key = str(trigger.get("suppression_key") or f"{merchant_id}:{trigger_id}")
         if state.suppression.seen_key(suppression_key):
             continue
 
